@@ -4,7 +4,7 @@ var ListItem = require('./list-item');
 module.exports = React.createClass({
   render: function() {
     return <div>
-      {this.renderList()}
+      {this.renderList(this.props.generateNumberOptions)}
     </div>
   },
   filterByCompleteness: function(itemsToFilter) {
@@ -16,7 +16,7 @@ module.exports = React.createClass({
     }
     else return itemsToFilter;
   },
-  renderList: function() {
+  renderList: function(generateNumberOptions) {
     if(!this.props.items) {
       return <h4>
         Add a todo to get started.
@@ -38,6 +38,7 @@ module.exports = React.createClass({
         return <ListItem
             item={item}
             key={item.key}
+            generateNumberOptions={generateNumberOptions}
             >
           </ListItem>
       });

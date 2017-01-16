@@ -25,10 +25,10 @@ var App = React.createClass({
         <h2 className="text-center">
           To-Do List
         </h2>
-        <Header itemsStore={this.firebaseRefs.items} />
+        <Header generateNumberOptions={this.generateNumberOptions} itemsStore={this.firebaseRefs.items} />
         <hr />
         <div className={"content " + (this.state.loaded ? 'loaded' : '')}>
-          <List items={this.state.items} doneFilter={this.state.doneFilter} />
+          <List generateNumberOptions={this.generateNumberOptions} items={this.state.items} doneFilter={this.state.doneFilter} />
           {this.deleteButton()}
         </div>
       </div>
@@ -73,7 +73,17 @@ var App = React.createClass({
     this.setState({
       doneFilter: event.target.value
     });
-  }
+  },
+  // Methods that are used in different components
+  generateNumberOptions: function() {
+      var options = [];
+      for (var i = 0; i < 10; i++) {
+        options.push(i+1);
+      };
+      return options.map(function(option, i) {
+        return <option value={option} key={i}>{option}</option>;
+      });
+    }
 });
 
 var element = React.createElement(App, {});
